@@ -1,0 +1,57 @@
+group 'com.example.calllog'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral() // Use Maven Central for dependencies
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.2.1' // Latest Android Gradle Plugin
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10" // Kotlin plugin
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android' // Kotlin Android plugin
+
+android {
+    compileSdkVersion 33 // Latest SDK version
+
+    defaultConfig {
+        minSdkVersion 21 // Minimum SDK
+        targetSdkVersion 34 // Target SDK
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        // Specify Java 17 as the target version
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17" // Set Kotlin JVM target to 17 to match Java
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+
+    namespace "com.example.calllog" // Ensure the namespace matches your package
+}
+
+dependencies {
+    implementation 'androidx.annotation:annotation:1.6.0' // Latest version
+    implementation 'androidx.core:core-ktx:1.12.0' // KTX for Kotlin support
+    implementation 'org.apache.commons:commons-lang3:3.12.0' // Latest commons-lang3
+
+    // Kotlin standard library
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.10" // Kotlin standard library
+}
