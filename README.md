@@ -26,10 +26,6 @@ This plugin is still maintaining backward compatibility with v1 embedding. This 
 
 This plugin may be used in flutter background engine, via plugins like WorkManager. But please note that it is impossible for plugin to request permission while it is executed in background. You have to manually request permissions READ_call_e_log and READ_PHONE_STATE
 
-## Note on iOS support
-
-Unfortuynately iOS doesn't support queries of call log. More information here: https://stackoverflow.com/questions/33753644/is-there-an-ios-api-for-accessing-call-logs 
-
 ## Example
 
 ``` dart
@@ -55,3 +51,15 @@ Iterable<CallLogEntry> entries = await CallLog.query(
 ```
 
 ## call recording
+
+``` dart
+mainProgram() async {
+  Map<String, dynamic> callData = await CallLog().uploadCallRecoding();
+
+  print("Mobile: ${callData['mobile']}");
+  print("Start Time: ${callData['start']}");
+  print("End Time: ${callData['end']}");
+  print("Duration: ${callData['duration']}");
+  print("Recording Path: ${callData['recording']}");
+}
+```
